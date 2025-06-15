@@ -1,0 +1,6 @@
+@RentRoom_HostAddress = http://localhost:5283
+
+GET {{RentRoom_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
