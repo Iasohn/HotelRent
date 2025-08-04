@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using RentRoom.Models;
+using System.Reflection.Emit;
 
 
 namespace RentRoom.DbContextProj
@@ -11,7 +13,7 @@ namespace RentRoom.DbContextProj
         public ProjectDbContext(DbContextOptions<ProjectDbContext> options) : base(options) { }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Room> Rooms { get; set; }
-        
+        public DbSet<Review> Reviews { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -23,7 +25,18 @@ namespace RentRoom.DbContextProj
             builder.Entity<Booking>().HasOne(F => F.RentRoom).WithMany(d => d.Bookings);
             builder.Entity<User>().HasOne(F => F.Booking).WithOne(d => d.RentUser).HasForeignKey<Booking>(d => d.RentUserID);
 
-         
+            builder.Entity<Review>()
+               .HasOne(r => r.user)
+               .WithMany(u => u.Reviews)
+               .HasForeignKey(r => r.UserId);
+
+            builder.Entity<Review>()
+               .HasOne(r => r.room)
+               .WithMany(rm => rm.Reviews)
+               .HasForeignKey(r => r.roomId);
+
+
+
         }
 
     }

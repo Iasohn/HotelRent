@@ -67,6 +67,7 @@ builder.Services.AddSwaggerGen(option =>
 builder.Services.AddOpenApi();
 builder.Services.AddTransient<IEmailSendService,EmailSendService>();
 builder.Services.AddScoped<IRoomInterface , RoomRepository >();
+builder.Services.AddScoped<ReviewInterface, ReviewRepository>();
 builder.Services.AddMemoryCache();
 
 builder.Services.AddDbContext<ProjectDbContext>(options => options.UseSqlServer(builder.Configuration["ConnectionStrings:RentRoomContext"]));

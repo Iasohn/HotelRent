@@ -6,5 +6,7 @@ namespace RentRoom.Models
     {
         public string Role { get; set; }
         public Booking Booking { get; set; } 
+
+        public ICollection<Review> Reviews { get; set; }
     }
 }

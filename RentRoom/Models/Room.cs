@@ -20,5 +20,6 @@ namespace RentRoom.Models
         public List<Booking> Bookings { get; set; }
         public string Image { get; set; }
 
+        public ICollection<Review> Reviews { get; set; }
     }
 }
